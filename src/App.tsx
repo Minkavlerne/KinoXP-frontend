@@ -1,7 +1,10 @@
 import { Routes, Route } from "react-router-dom";
-import "./App.css";
 import NavBar from './NavBar';
 import Movies from "./components/Movies";
+import LoginPage from "./pages/LoginPage";
+import SignUpPage from "./pages/SignUpPage";
+
+
 export default function App() {
   return (
     <>
@@ -10,8 +13,8 @@ export default function App() {
         <Route path="/movies" element={<Movies/>} />
         <Route path="/tickets" element={<p>Tickets</p>} />
         <Route path="/upcoming" element={<p>Coming Soon</p>} />
-        <Route path="/login" element={<p>Login</p>} />
-        <Route path="/signup" element={<p>Sign Up</p>} />
+        <Route path="/login" element={<LoginPage/>} />
+        <Route path="/signup" element={<SignUpPage/>} />
       </Routes>
       </>
   );

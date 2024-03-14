@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 //import { useAuth } from "./security/AuthProvider";
 import { useAuth } from "./AuthProvider";
 import { User } from "../services/authFacade";
-import "./login.css";
 
 const Login = () => {
     const [user, setUser] = useState({ username: "", password: "" });
@@ -35,21 +34,27 @@ const Login = () => {
     }
 
     return (
-        <div className="login-wrapper">
-            <form className="login-form" onSubmit={handleSubmit}>
-                <h2>Login</h2>
-                <div className="login-form-group">
-                    <label htmlFor="username">Username</label>
-                    <input type="text" name="username" value={user.username} onChange={(e) => setUser((prev) => ({ ...prev, username: e.target.value }))} required />
-                </div>
-                <div className="login-form-group">
-                    <label htmlFor="password">Password</label>
-                    <input type="password" name="password" value={user.password} onChange={(e) => setUser((prev) => ({ ...prev, password: e.target.value }))} required />
-                </div>
-                <button type="submit" className="login-btn">
-                    Login
-                </button>
-            </form>
+        <div className="flex items-center justify-center h-screen bg-gray-200">
+            <div className="bg-white p-8 rounded shadow-md w-100" >
+                <form className="login-form" onSubmit={handleSubmit}>
+                    <h1 className="text-2xl font-bold mb-8">Login</h1>
+                    <div className="login-form-group">
+                        <label className="block">
+                            <span className="text-gray-700">Username: </span>
+                            <input type="text" name="username" value={user.username} onChange={(e) => setUser((prev) => ({ ...prev, username: e.target.value }))} required />
+                        </label>
+                    </div>
+                    <div className="login-form-group">
+                        <label className="block">
+                            <span className="text-gray-700">Password:</span>
+                            <input type="password" name="password" value={user.password} onChange={(e) => setUser((prev) => ({ ...prev, password: e.target.value }))} required />
+                        </label>
+                    </div>
+                    <button type="submit" className="w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700">
+                        Login
+                    </button>
+                </form>
+            </div>
         </div>
     );
 };
