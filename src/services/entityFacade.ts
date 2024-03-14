@@ -6,7 +6,8 @@ interface Movie {
   posterUrl: string;
   trailerUrl: string;
   ageLimit: number;
-  Duration: string;
+  duration: string;
+  categories: Array<Category>;
 }
 
 interface Category {
