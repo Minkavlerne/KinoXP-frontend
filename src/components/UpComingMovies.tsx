@@ -14,7 +14,7 @@ export default function UpComingMovies() {
       <ul>
         {movies.map((movie) => (
             <Link to={`/movie/${movie.id}`} key={movie.id}>
-          <li key={movie.id}>
+          <li>
             {movie.title}
           </li>
             </Link>

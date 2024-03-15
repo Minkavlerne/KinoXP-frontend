@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getMovies } from "../services/apiFacade";
 import { Movie } from "../services/entityFacade";
 import { Link } from "react-router-dom";
+import React from "react";
 
 export default function Movies() {
     const [movies, setMovies] = useState<Array<Movie> | null>(null);
@@ -18,9 +19,9 @@ export default function Movies() {
         {movies ? (
           movies.map((movie) => {
             return (
-              <>
+              <React.Fragment key={movie.id}>
                 <Link to={`/movies/${movie.id}`}>
-                  <li key={movie.id}>
+                  <li>
                     <img src={movie.posterBase64} alt={movie.title} />
                   </li>
                 </Link>
@@ -29,7 +30,7 @@ export default function Movies() {
                     <Link to={`/tickets/${movie.id}`}></Link>
                   </Link>
                 </div>
-              </>
+              </React.Fragment>
             );
           })
         ) : (
@@ -38,3 +39,4 @@ export default function Movies() {
       </ul>
     </>
   );
+        }
