@@ -10,22 +10,31 @@ export default function Movies() {
         getMovies().then((data) => setMovies(data));
     }, []);
 
-    return (
-        <>
-            <ul>
-                <h2>Movies</h2>
-                {movies ? (
-                    movies.map((movie) => {
-                        return (
-                            <li key={movie.id}>
-                                <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
-                            </li>
-                        );
-                    })
-                ) : (
-                    <p>Loading...</p>
-                )}
-            </ul>
-        </>
-    );
-}
+
+  return (
+    <>
+      <h1 style={{ textAlign: "center" }}>Movies</h1>
+      <ul style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "1rem" }}>
+        {movies ? (
+          movies.map((movie) => {
+            return (
+              <>
+                <Link to={`/movies/${movie.id}`}>
+                  <li key={movie.id}>
+                    <img src={movie.posterBase64} alt={movie.title} />
+                  </li>
+                </Link>
+                <div>
+                  <Link to={`/movies/${movie.id}`}>
+                    <Link to={`/tickets/${movie.id}`}></Link>
+                  </Link>
+                </div>
+              </>
+            );
+          })
+        ) : (
+          <p>Loading...</p>
+        )}
+      </ul>
+    </>
+  );
