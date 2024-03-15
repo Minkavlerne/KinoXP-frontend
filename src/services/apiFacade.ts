@@ -9,6 +9,9 @@ const MOVIE_SHOWS_URL = API_URL + "/movieShows";
 async function getMovies() {
   return fetch(MOVIES_URL).then(handleHttpErrors);
 }
+async function getMovieById(id: number) {
+  return fetch(MOVIES_URL + "/" + id).then(handleHttpErrors);
+}
 async function getCategories() {
   return fetch(CATEGORIES_URL).then(handleHttpErrors);
 }
@@ -19,4 +22,4 @@ async function getUpcoming() {
   return fetch(MOVIES_URL + "/upcoming").then(handleHttpErrors);
 }
 
-export { getMovies, getCategories, getMovieShows, getUpcoming };
+export { getMovies, getMovieById, getCategories, getMovieShows, getUpcoming };

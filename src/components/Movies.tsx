@@ -4,11 +4,12 @@ import { Movie } from "../services/entityFacade";
 import { Link } from "react-router-dom";
 
 export default function Movies() {
-  const [movies, setMovies] = useState<Array<Movie> | null>(null);
+    const [movies, setMovies] = useState<Array<Movie> | null>(null);
 
-  useEffect(() => {
-    getMovies().then((data) => setMovies(data));
-  }, []);
+    useEffect(() => {
+        getMovies().then((data) => setMovies(data));
+    }, []);
+
 
   return (
     <>
@@ -37,4 +38,3 @@ export default function Movies() {
       </ul>
     </>
   );
-}
