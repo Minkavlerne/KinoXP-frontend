@@ -11,8 +11,8 @@ export default function Movies() {
 
   return (
     <>
-      <ul>
-        <h2>Movies</h2>
+      <h1 style={{ textAlign: "center" }}>Movies</h1>
+      <ul style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "1rem" }}>
         {movies ? (
           movies.map((movie) => {
             return <li key={movie.id}>{movie.title}</li>;
