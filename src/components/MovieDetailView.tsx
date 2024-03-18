@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 export default function MovieDetailView() {
     const [movie, setMovie] = useState<Movie | null>(null);
-    const { id } = useParams(); // assuming you're using react-router and the id is in the URL
+    const { id } = useParams();
 
     useEffect(() => {
         getMovieById(Number(id)).then((data) => setMovie(data));
