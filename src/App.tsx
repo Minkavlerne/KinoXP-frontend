@@ -5,13 +5,12 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import MovieDetailView from "./components/MovieDetailView";
 import UpComingMovies from "./components/UpComingMovies";
-import ImageConverter from "./components/ImageConverter";
+import MovieFormPage from "./pages/MovieFormPage";
 
 export default function App() {
     return (
         <>
             <NavBar />
-            <ImageConverter />
             <Routes>
                 <Route path="/movies" element={<Movies />} />
                 <Route path="/tickets" element={<p>Tickets</p>} />
@@ -20,6 +19,7 @@ export default function App() {
                 <Route path="/signup" element={<SignUpPage />} />
                 <Route path="/movies/:id" element={<MovieDetailView />} />
                 <Route path="/upcoming/:id" element={<MovieDetailView />} />
+                <Route path="/movieform" element={<MovieFormPage />} />
             </Routes>
         </>
     );
