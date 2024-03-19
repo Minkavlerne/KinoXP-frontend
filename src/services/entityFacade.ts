@@ -1,38 +1,45 @@
 interface Movie {
-  id: number;
-  title: string;
-  description: string;
-  posterBase64: string;
-  posterUrl: string;
-  trailerUrl: string;
-  ageLimit: number;
-  duration: string;
-  releaseDate: string;
-  categories: Array<string>;
+    id: number;
+    title: string;
+    description: string;
+    posterBase64: string;
+    posterUrl: string;
+    trailerUrl: string;
+    ageLimit: number;
+    duration: string;
+    releaseDate: string;
+    categories: Array<string>;
 }
 
 interface Category {
-  name: string;
+    name: string;
 }
 
 interface MovieShow {
-  id: number;
-  startTime: Date;
-  endTime: Date;
-  movieId: number;
-  theaterId: number;
+    id: number;
+    startTime: Date;
+    endTime: Date;
+    movieId: number;
+    theaterId: number;
 }
 
 interface Theater {
-  id: number;
-  name: string;
-  movieShowList: Array<MovieShow>;
+    id: number;
+    name: string;
+    seats: Array<Seat>;
 }
 interface Booking {
-  id: number;
-  bookingNumber: string;
-  userId: number;
-  movieShowId: number;
+    id: number;
+    bookingNumber: string;
+    username: string;
+    movieShowId: number;
 }
 
-export type { Movie, Category, MovieShow, Theater, Booking };
+interface Seat {
+    id: number;
+    row: number;
+    column: number;
+    type: string;
+}
+
+export type { Movie, Category, MovieShow, Theater, Booking, Seat };
