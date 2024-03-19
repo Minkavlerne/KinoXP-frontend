@@ -11,6 +11,7 @@ import TheaterAdminPage from "./pages/TheaterAdminPage";
 import RequireAuth from "./security/RequireAuth";
 import Logout from "./security/Logout";
 import MoviesPage from "./pages/MoviesPage";
+import TheaterAdminView from "./components/TheaterAdminView";
 
 export default function App() {
     return (
@@ -31,6 +32,14 @@ export default function App() {
                     element={
                         <RequireAuth roles={["ADMIN"]}>
                             <TheaterAdminPage />
+                        </RequireAuth>
+                    }
+                />
+                <Route
+                    path="/theaters/:id"
+                    element={
+                        <RequireAuth roles={["ADMIN"]}>
+                            <TheaterAdminView />
                         </RequireAuth>
                     }
                 />

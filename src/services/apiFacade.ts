@@ -1,4 +1,4 @@
-import { Movie } from "./entityFacade";
+import { Movie, Theater } from "./entityFacade";
 import { handleHttpErrors, makeOptions } from "./fetchUtils";
 import { API_URL } from "../settings";
 const MOVIES_URL = API_URL + "/movies";
@@ -31,4 +31,23 @@ async function getTheaters() {
     return fetch(THEATERS_URL).then(handleHttpErrors);
 }
 
-export { getMovies, getMovieById, postMovie, getCategories, getMovieShows, getUpcoming, getTheaters };
+async function getTheaterById(id: number) {
+    return fetch(THEATERS_URL + "/" + id).then(handleHttpErrors);
+}
+
+async function postTheater(theater: Theater) {
+    const options = makeOptions("POST", theater);
+    return fetch(THEATERS_URL, options).then(handleHttpErrors);
+}
+
+async function updateTheater(theater: Theater) {
+    const options = makeOptions("PUT", theater);
+    return fetch(THEATERS_URL + "/" + theater.id, options).then(handleHttpErrors);
+}
+
+async function deleteTheater(id: number) {
+    const options = makeOptions("DELETE", null);
+    return fetch(THEATERS_URL + "/" + id, options).then(handleHttpErrors);
+}
+
+export { getMovies, getMovieById, postMovie, getCategories, getMovieShows, getUpcoming, getTheaters, getTheaterById, postTheater, updateTheater, deleteTheater };
