@@ -5,6 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import MovieDetailView from "./components/MovieDetailView";
 import UpComingMovies from "./components/UpComingMovies";
+import MovieFormPage from "./pages/MovieFormPage";
 import HomePage from "./pages/HomePage";
 import "./Style.css";
 import ImageConverter from "./components/ImageConverter";
@@ -16,7 +17,6 @@ export default function App() {
     return (
         <>
             <NavBar />
-            <ImageConverter />
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/movies" element={<Movies />} />
@@ -44,6 +44,7 @@ export default function App() {
                     }
                 />
                 <Route path="*" element={<h1>Page not found</h1>} />
+                <Route path="/movieform" element={<MovieFormPage />} />
             </Routes>
         </>
     );
