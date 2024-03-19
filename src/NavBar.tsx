@@ -19,7 +19,7 @@ export default function NavBar() {
                             <li>
                                 <NavLink to="/upcoming">Coming Soon</NavLink>
                             </li>
-                            {auth.isLoggedIn() && (
+                            {!auth.isLoggedIn() && (
                                 <li>
                                     <NavLink to="/signup">Sign Up</NavLink>
                                 </li>

@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import NavBar from "./NavBar";
-import Movies from "./components/Movies";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import MovieDetailView from "./components/MovieDetailView";
@@ -11,6 +10,7 @@ import "./Style.css";
 import TheaterAdminPage from "./pages/TheaterAdminPage";
 import RequireAuth from "./security/RequireAuth";
 import Logout from "./security/Logout";
+import MoviesPage from "./pages/MoviesPage";
 
 export default function App() {
     return (
@@ -18,7 +18,7 @@ export default function App() {
             <NavBar />
             <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/movies" element={<Movies />} />
+                <Route path="/movies" element={<MoviesPage />} />
                 <Route path="/tickets" element={<p>Tickets</p>} />
                 <Route path="/upcoming" element={<UpComingMovies />} />
                 <Route path="/login" element={<LoginPage />} />
