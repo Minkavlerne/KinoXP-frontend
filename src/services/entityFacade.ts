@@ -7,11 +7,11 @@ interface Movie {
   trailerUrl: string;
   ageLimit: number;
   duration: string;
-  categories: Array<Category>;
+  releaseDate: string;
+  categories: Array<string>;
 }
 
 interface Category {
-  id: number;
   name: string;
 }
 
