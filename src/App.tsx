@@ -7,11 +7,13 @@ import MovieDetailView from "./components/MovieDetailView";
 import UpComingMovies from "./components/UpComingMovies";
 import HomePage from "./pages/HomePage";
 import './Style.css';
+import ImageConverter from "./components/ImageConverter";
 
 export default function App() {
     return (
         <>
             <NavBar />
+            <ImageConverter />
             <Routes>
                 <Route path="/" element={<HomePage/>} />
                 <Route path="/movies" element={<Movies/>} />
