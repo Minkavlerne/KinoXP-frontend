@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import { getMovies } from "../services/apiFacade";
 import { useEffect, useState } from "react";
 import { Movie } from "../services/entityFacade";
+
 
 export default function UpComingMovies() {
     const [movies, setMovies] = useState<Movie[]>([]);
@@ -13,15 +13,10 @@ export default function UpComingMovies() {
     }, []);
 
     return (
-        <div>
-            <h1>Upcoming Movies</h1>
-            <ul>
-                {movies.map((movie) => (
-                    <Link to={`/movie/${movie.id}`} key={movie.id}>
-                        <li>{movie.posterBase64 && <img src={movie.posterBase64} alt={movie.title} />}</li>
-                    </Link>
-                ))}
-            </ul>
+        <div className="w-64 h-85 pl-10 pb-10 grid grid-rows-2">
+            {movies.map((movie) => (
+                <img src={movie.posterUrl} />
+            ))}
         </div>
     );
 }
