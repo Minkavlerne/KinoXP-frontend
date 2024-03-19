@@ -12,17 +12,17 @@ export default function Movies() {
 
     return (
         <>
-            <div className="bg-kino-blue pb-5">
-                <h1 style={{ textAlign: "center" }}>Movies</h1>
-                <ul className="grid grid-cols-4 gap-4">
+            <div className="bg-kino-blue text-kino-white">
+                <h1 className="text-center">Movies</h1>
+                <div className="grid grid-cols-4 gap-2 p-10 justify-items-center">
                     {movies ? (
                         movies.map((movie) => {
-                            return <MoviePoster movie={movie} />;
+                            return <MoviePoster movie={movie} key={movie.id} />;
                         })
                     ) : (
                         <p>Loading...</p>
                     )}
-                </ul>
+                </div>
             </div>
         </>
     );

@@ -7,7 +7,7 @@ export default function NavBar() {
     return (
         <>
             <nav className="bg-kino-blue">
-                <ul className="text-kino-red text-lg">
+                <ul className="text-kino-red text-lg font-bold">
                     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                         <div className="relative flex h-16 items-center justify-between">
                             <li>
