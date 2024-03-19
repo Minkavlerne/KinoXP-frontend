@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { getMovies } from "../services/apiFacade";
 import { Movie } from "../services/entityFacade";
-import { Link } from "react-router-dom";
-import React from "react";
+import MoviePoster from "./MoviePoster";
 
 export default function Movies() {
     const [movies, setMovies] = useState<Array<Movie> | null>(null);
@@ -11,32 +10,18 @@ export default function Movies() {
         getMovies().then((data) => setMovies(data));
     }, []);
 
-
-  return (
-    <>
-      <h1 style={{ textAlign: "center" }}>Movies</h1>
-      <ul style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "1rem" }}>
-        {movies ? (
-          movies.map((movie) => {
-            return (
-              <React.Fragment key={movie.id}>
-                <Link to={`/movies/${movie.id}`}>
-                  <li>
-                    <img src={movie.posterBase64} alt={movie.title} />
-                  </li>
-                </Link>
-                <div>
-                  <Link to={`/movies/${movie.id}`}>
-                    <Link to={`/tickets/${movie.id}`}></Link>
-                  </Link>
-                </div>
-              </React.Fragment>
-            );
-          })
-        ) : (
-          <p>Loading...</p>
-        )}
-      </ul>
-    </>
-  );
-        }
+    return (
+        <>
+            <h1 style={{ textAlign: "center" }}>Movies</h1>
+            <ul style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "1rem" }}>
+                {movies ? (
+                    movies.map((movie) => {
+                        return <MoviePoster movie={movie} />;
+                    })
+                ) : (
+                    <p>Loading...</p>
+                )}
+            </ul>
+        </>
+    );
+}
