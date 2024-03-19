@@ -3,18 +3,25 @@ import { Link } from "react-router-dom";
 import { Movie } from "../services/entityFacade";
 
 export default function MoviePoster({ movie }: { movie: Movie }) {
-    return (
-        <React.Fragment key={movie.id}>
-            <Link to={`/movies/${movie.id}`}>
-                <li>
-                    <img className="object-cover" src={movie.posterUrl} alt={movie.title} />
-                </li>
+  return (
+    <React.Fragment key={movie.id}>
+      <div className="">
+        <Link to={`/movies/${movie.id}`}>
+          <img className="h-64 object-cover" src={movie.posterUrl} alt={movie.title} />
+        </Link>
+        <div className="">
+          <Link to={`/movies/${movie.id}`} className="">
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+              Details
+            </button>
+            <Link to={`/tickets/${movie.id}`}>
+              <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                Buy Ticket
+              </button>
             </Link>
-            <div>
-                <Link to={`/movies/${movie.id}`}>
-                    <Link to={`/tickets/${movie.id}`}></Link>
-                </Link>
-            </div>
-        </React.Fragment>
-    );
+          </Link>
+        </div>
+      </div>
+    </React.Fragment>
+  );
 }
