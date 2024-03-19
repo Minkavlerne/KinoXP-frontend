@@ -12,16 +12,18 @@ export default function Movies() {
 
     return (
         <>
-            <h1 style={{ textAlign: "center" }}>Movies</h1>
-            <ul style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "1rem" }}>
-                {movies ? (
-                    movies.map((movie) => {
-                        return <MoviePoster movie={movie} />;
-                    })
-                ) : (
-                    <p>Loading...</p>
-                )}
-            </ul>
+            <div className="bg-kino-blue pb-5">
+                <h1 style={{ textAlign: "center" }}>Movies</h1>
+                <ul className="grid grid-cols-4 gap-4">
+                    {movies ? (
+                        movies.map((movie) => {
+                            return <MoviePoster movie={movie} />;
+                        })
+                    ) : (
+                        <p>Loading...</p>
+                    )}
+                </ul>
+            </div>
         </>
     );
 }

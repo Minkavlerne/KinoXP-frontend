@@ -24,7 +24,7 @@ export default function NavBar() {
                                     <NavLink to="/signup">Sign Up</NavLink>
                                 </li>
                             )}
-                            {!auth.isLoggedIn() && (
+                            {auth.isLoggedIn() && (
                                 <li>
                                     <NavLink to="/profile">My Profile</NavLink>
                                 </li>
@@ -32,6 +32,11 @@ export default function NavBar() {
                             {auth.isLoggedInAs(["ADMIN"]) && (
                                 <li>
                                     <NavLink to="/theaters">Theaters</NavLink>
+                                </li>
+                            )}
+                            {auth.isLoggedInAs(["ADMIN"]) && (
+                                <li>
+                                    <NavLink to="/movieform">Add Movie</NavLink>
                                 </li>
                             )}
                             <AuthStatus />

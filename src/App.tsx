@@ -8,7 +8,6 @@ import UpComingMovies from "./components/UpComingMovies";
 import MovieFormPage from "./pages/MovieFormPage";
 import HomePage from "./pages/HomePage";
 import "./Style.css";
-import ImageConverter from "./components/ImageConverter";
 import TheaterAdminPage from "./pages/TheaterAdminPage";
 import RequireAuth from "./security/RequireAuth";
 import Logout from "./security/Logout";
@@ -43,8 +42,15 @@ export default function App() {
                         </RequireAuth>
                     }
                 />
+                <Route
+                    path="/movieform"
+                    element={
+                        <RequireAuth roles={["ADMIN"]}>
+                            <MovieFormPage />
+                        </RequireAuth>
+                    }
+                />
                 <Route path="*" element={<h1>Page not found</h1>} />
-                <Route path="/movieform" element={<MovieFormPage />} />
             </Routes>
         </>
     );

@@ -10,7 +10,7 @@ export default function TheaterAdminPage() {
     }, []);
 
     return (
-        <>
+        <div className="bg-kino-blue min-h-screen text-kino-white">
             <h1>Theater Admin Page</h1>
             <ul>
                 {theaters &&
@@ -21,6 +21,6 @@ export default function TheaterAdminPage() {
                         </li>
                     ))}
             </ul>
-        </>
+        </div>
     );
 }
