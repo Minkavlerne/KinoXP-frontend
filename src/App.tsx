@@ -3,7 +3,7 @@ import NavBar from "./NavBar";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import MovieDetailView from "./components/MovieDetailView";
-import UpComingMovies from "./components/UpComingMovies";
+import UpComingPage from "./pages/UpComingPage";
 import MovieFormPage from "./pages/MovieFormPage";
 import HomePage from "./pages/HomePage";
 import "./Style.css";
@@ -21,7 +21,7 @@ export default function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/movies" element={<MoviesPage />} />
                 <Route path="/tickets" element={<p>Tickets</p>} />
-                <Route path="/upcoming" element={<UpComingMovies />} />
+                <Route path="/upcoming" element={<UpComingPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/logout" element={<Logout />} />
                 <Route path="/signup" element={<SignUpPage />} />

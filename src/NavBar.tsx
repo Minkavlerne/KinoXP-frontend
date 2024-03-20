@@ -11,32 +11,32 @@ export default function NavBar() {
                     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                         <div className="relative flex h-16 items-center justify-between">
                             <li>
-                                <NavLink to="/">Home</NavLink>
+                                <NavLink className="hover:underline" to="/">Home</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/movies">Movies</NavLink>
+                                <NavLink className="hover:underline" to="/movies">Movies</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/upcoming">Coming Soon</NavLink>
+                                <NavLink className="hover:underline" to="/upcoming">Coming Soon</NavLink>
                             </li>
                             {!auth.isLoggedIn() && (
                                 <li>
-                                    <NavLink to="/signup">Sign Up</NavLink>
+                                    <NavLink className="hover:underline" to="/signup">Sign Up</NavLink>
                                 </li>
                             )}
                             {auth.isLoggedIn() && (
                                 <li>
-                                    <NavLink to="/profile">My Profile</NavLink>
+                                    <NavLink className="hover:underline" to="/profile">My Profile</NavLink>
                                 </li>
                             )}
                             {auth.isLoggedInAs(["ADMIN"]) && (
                                 <li>
-                                    <NavLink to="/theaters">Theaters</NavLink>
+                                    <NavLink className="hover:underline" to="/theaters">Theaters</NavLink>
                                 </li>
                             )}
                             {auth.isLoggedInAs(["ADMIN"]) && (
                                 <li>
-                                    <NavLink to="/movieform">Add Movie</NavLink>
+                                    <NavLink className="hover:underline" to="/movieform">Add Movie</NavLink>
                                 </li>
                             )}
                             <AuthStatus />
