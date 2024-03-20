@@ -3,6 +3,7 @@ import { postMovie, getCategories } from "../services/apiFacade";
 import { Category, Movie } from "../services/entityFacade";
 import ImageConverter from "./ImageConverter";
 import Select from "react-select";
+import { useLocation } from "react-router";
 
 const EMPTY_MOVIE = {
   id: null,
@@ -14,11 +15,11 @@ const EMPTY_MOVIE = {
   ageLimit: 0,
   duration: "",
   releaseDate: "",
-  categories: "",
+  categories: [""],
 };
 
 function MovieForm() {
-  const movieToEdit = null;
+  const movieToEdit = useLocation().state || null;
   const [formData, setFormData] = useState<Movie>(movieToEdit || EMPTY_MOVIE);
   const [categoryList, setCategoryList] = useState([""]);
   const [selectedCategories, setSelectedCategories] = useState([""]);
@@ -105,7 +106,7 @@ function MovieForm() {
         />
       </label>
       <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-        Submit ;
+        Submit
       </button>
     </form>
   );
