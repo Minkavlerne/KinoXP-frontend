@@ -12,7 +12,7 @@ export default function MovieDetailView() {
     }, [id]);
 
     return (
-        <div className="bg-kino-blue min-h-screen pt-5">
+        <div className="bg-kino-blue min-h-screen pt-5 pb-20">
             {movie ? (
                 <div key={movie.id} className="grid grid-cols-2 bg-kino-grey rounded-lg shadow-lg p-4 max-w-screen-md mx-auto">
                     <div>

@@ -12,6 +12,7 @@ import RequireAuth from "./security/RequireAuth";
 import Logout from "./security/Logout";
 import MoviesPage from "./pages/MoviesPage";
 import TheaterAdminView from "./components/TheaterAdminView";
+import TheaterForm from "./components/TheaterForm";
 
 export default function App() {
     return (
@@ -47,7 +48,7 @@ export default function App() {
                     path="/theaters-add"
                     element={
                         <RequireAuth roles={["ADMIN"]}>
-                            <h1>theaters add form TODO</h1>
+                            <TheaterForm />
                         </RequireAuth>
                     }
                 />
