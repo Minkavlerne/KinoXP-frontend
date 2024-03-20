@@ -12,12 +12,13 @@ export default function MovieDetailView() {
     }, [id]);
 
     return (
-        <div>
-            <h1>Movie Detail View</h1>
+        <div className="bg-kino-blue min-h-screen pt-5">
             {movie ? (
-                <div key={movie.id}>
-                    <h2>{movie.title}</h2>
-                    <p>{movie.description}</p>
+                <div key={movie.id} className="grid grid-cols-2 bg-kino-grey rounded-lg shadow-lg p-4 max-w-screen-md mx-auto">
+                    <div>
+                        <h2 className="text-2xl font-bold mb-2 pt-1">{movie.title}</h2>
+                        <p className="text-base pt-20 pr-5">{movie.description}</p>
+                    </div>
                     <img src={movie.posterUrl} alt={movie.title} />
                 </div>
             ) : (
