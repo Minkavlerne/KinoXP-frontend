@@ -25,6 +25,7 @@ function MovieForm() {
     const handleCategoryChange = (selectedOptions: { value: string; label: string }[]) => {
         setSelectedCategories(selectedOptions.map((option) => option.value));
     };
+    
 
     const handleImageUpload = (base64Image: string) => {
         setPosterBase64(base64Image);
@@ -78,6 +79,7 @@ function MovieForm() {
         <span className="text-gray-700">Categories:</span>
         <Select isMulti options={categoryList.map((category) => ({
            value: category, label: category }))} 
+           //@ts-ignore
            onChange={handleCategoryChange} 
            className="mt-1 w-full" />
       </label>
