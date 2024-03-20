@@ -12,6 +12,9 @@ export default {
                 "kino-grey": "var(--kino-grey)",
                 "kino-white": "var(--kino-white)",
             },
+            fontFamily: {
+                'One': ['Racing Sans One', 'sans-serif'],
+              }
         },
     },
     plugins: [],
