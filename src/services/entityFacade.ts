@@ -12,6 +12,7 @@ interface Movie {
 }
 
 interface Category {
+    id: number;
     name: string;
 }
 
