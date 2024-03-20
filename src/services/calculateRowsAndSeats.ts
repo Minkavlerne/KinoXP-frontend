@@ -1,0 +1,11 @@
+export function calculateRowsAndSeats(seats: { id: number; seatRow: number; seatNumber: number; type: string }[]) {
+    let rows = 0;
+    let seatsPerRow = 0;
+
+    seats.forEach((seat) => {
+        rows = Math.max(rows, seat.seatRow);
+        seatsPerRow = Math.max(seatsPerRow, seat.seatNumber);
+    });
+
+    return { rows, seatsPerRow };
+}

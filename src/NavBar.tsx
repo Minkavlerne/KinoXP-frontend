@@ -7,7 +7,7 @@ export default function NavBar() {
     return (
         <>
             <nav className="bg-kino-blue">
-                <ul className="text-kino-red text-lg">
+                <ul className="text-kino-red text-lg font-bold">
                     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                         <div className="relative flex h-16 items-center justify-between">
                             <li>
@@ -19,12 +19,12 @@ export default function NavBar() {
                             <li>
                                 <NavLink to="/upcoming">Coming Soon</NavLink>
                             </li>
-                            {auth.isLoggedIn() && (
+                            {!auth.isLoggedIn() && (
                                 <li>
                                     <NavLink to="/signup">Sign Up</NavLink>
                                 </li>
                             )}
-                            {!auth.isLoggedIn() && (
+                            {auth.isLoggedIn() && (
                                 <li>
                                     <NavLink to="/profile">My Profile</NavLink>
                                 </li>
@@ -32,6 +32,11 @@ export default function NavBar() {
                             {auth.isLoggedInAs(["ADMIN"]) && (
                                 <li>
                                     <NavLink to="/theaters">Theaters</NavLink>
+                                </li>
+                            )}
+                            {auth.isLoggedInAs(["ADMIN"]) && (
+                                <li>
+                                    <NavLink to="/movieform">Add Movie</NavLink>
                                 </li>
                             )}
                             <AuthStatus />

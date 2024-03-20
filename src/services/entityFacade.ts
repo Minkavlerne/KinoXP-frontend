@@ -28,6 +28,12 @@ interface Theater {
     name: string;
     seats: Array<Seat>;
 }
+
+interface TheaterWithRowsAndSeats extends Theater {
+    rows: number;
+    seatsPerRow: number;
+}
+
 interface Booking {
     id: number;
     bookingNumber: string;
@@ -37,9 +43,9 @@ interface Booking {
 
 interface Seat {
     id: number;
-    row: number;
-    column: number;
+    seatRow: number;
+    seatNumber: number;
     type: string;
 }
 
-export type { Movie, Category, MovieShow, Theater, Booking, Seat };
+export type { Movie, Category, MovieShow, Theater, TheaterWithRowsAndSeats, Booking, Seat };

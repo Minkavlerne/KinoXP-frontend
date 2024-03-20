@@ -11,7 +11,7 @@ export default function MovieDetailViewPage() {
     }, []);
 
     return (
-        <div>
+        <div className="bg-kino-blue min-h-screen">
             <h1>Movies</h1>
             {movies.map((movie) => (
                 <Link to={`/movies/${movie.id}`}>

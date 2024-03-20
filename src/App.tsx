@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import NavBar from "./NavBar";
-import Movies from "./components/Movies";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import MovieDetailView from "./components/MovieDetailView";
@@ -8,10 +7,11 @@ import UpComingMovies from "./components/UpComingMovies";
 import MovieFormPage from "./pages/MovieFormPage";
 import HomePage from "./pages/HomePage";
 import "./Style.css";
-import ImageConverter from "./components/ImageConverter";
 import TheaterAdminPage from "./pages/TheaterAdminPage";
 import RequireAuth from "./security/RequireAuth";
 import Logout from "./security/Logout";
+import MoviesPage from "./pages/MoviesPage";
+import TheaterAdminView from "./components/TheaterAdminView";
 
 export default function App() {
     return (
@@ -19,7 +19,7 @@ export default function App() {
             <NavBar />
             <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/movies" element={<Movies />} />
+                <Route path="/movies" element={<MoviesPage />} />
                 <Route path="/tickets" element={<p>Tickets</p>} />
                 <Route path="/upcoming" element={<UpComingMovies />} />
                 <Route path="/login" element={<LoginPage />} />
@@ -36,6 +36,14 @@ export default function App() {
                     }
                 />
                 <Route
+                    path="/theaters/:id"
+                    element={
+                        <RequireAuth roles={["ADMIN"]}>
+                            <TheaterAdminView />
+                        </RequireAuth>
+                    }
+                />
+                <Route
                     path="/theaters-add"
                     element={
                         <RequireAuth roles={["ADMIN"]}>
@@ -43,8 +51,15 @@ export default function App() {
                         </RequireAuth>
                     }
                 />
+                <Route
+                    path="/movieform"
+                    element={
+                        <RequireAuth roles={["ADMIN"]}>
+                            <MovieFormPage />
+                        </RequireAuth>
+                    }
+                />
                 <Route path="*" element={<h1>Page not found</h1>} />
-                <Route path="/movieform" element={<MovieFormPage />} />
             </Routes>
         </>
     );
