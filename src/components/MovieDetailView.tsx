@@ -20,7 +20,8 @@ export default function MovieDetailView() {
             <p className="text-base pt-20 pr-5">{movie.description}</p>
             <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
               <Link to="/movieform" state={movie}>
-                Edit Movie
+                {" "}
+                Edit Movie{" "}
               </Link>
             </button>
           </div>
