@@ -1,5 +1,5 @@
 interface Movie {
-    id: number;
+    id: number | null;
     title: string;
     description: string;
     posterBase64: string;
