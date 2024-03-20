@@ -1,10 +1,9 @@
-import UpComingMovies from "../components/UpComingMovies";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useState, useEffect } from "react";
 import { getMovies } from "../services/apiFacade";
 import { Movie } from "../services/entityFacade";
-// import MoviePoster from "../components/MoviePoster";
+import MoviePoster from "../components/MoviePoster";
 
 export default function HomePage() {
     const [movies, setMovies] = useState<Array<Movie> | null>(null);
@@ -13,7 +12,7 @@ export default function HomePage() {
     }, []);
 
     return (
-        <div className="bg-kino-blue min-h-screen">
+        <div className="bg-kino-blue min-h-screen pb-10 px-10">
             <div>
                 <h1 className="text-4xl font-bold text-kino-white text-center">Welcome to the Movie Theater</h1>
                 <p className="text-lg text-kino-grey text-center">Here you can see the latest movies and buy tickets.</p>
@@ -37,9 +36,12 @@ export default function HomePage() {
                 )}
                 <div>
                     <p className="pl-10 text-kino-white text-xl font-bold py-10"> Movies coming soon</p>
-
-                    <div>
-                        <UpComingMovies />
+                    <div className="grid grid-cols-4 text-kino-grey">
+                        {movies?.map((movie) => {
+                            if (new Date(movie.releaseDate) > new Date()) {
+                                return <MoviePoster movie={movie} key={movie.id} />;
+                            }
+                        })}
                     </div>
                 </div>
             </div>

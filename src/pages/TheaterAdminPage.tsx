@@ -10,7 +10,7 @@ export default function TheaterAdminPage() {
     useEffect(() => {
         getTheaters().then((data) => {
             const updatedTheaters = data.map((theater: TheaterWithRowsAndSeats) => {
-                const { rows, seatsPerRow } = calculateRowsAndSeats(theater.seats);
+                const { rows, seatsPerRow } = calculateRowsAndSeats(theater.seats!);
                 return { ...theater, rows, seatsPerRow };
             });
             setTheaters(updatedTheaters);
@@ -28,7 +28,7 @@ export default function TheaterAdminPage() {
                     theaters.map((theater) => (
                         <div key={theater.id} className="border-solid rounded">
                             <p>Name: {theater.name}</p>
-                            <p className="pb-2">Capacity: {theater.seats.length}</p>
+                            <p className="pb-2">Capacity: {theater.seats!.length}</p>
                             <Link to={`/theaters/${theater.id}`} className="w-1/2 px-2 py-1 border-solid rounded bg-kino-grey">
                                 Details
                             </Link>
