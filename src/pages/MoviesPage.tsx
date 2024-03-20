@@ -28,9 +28,9 @@ export default function MoviesPage() {
 
     return (
         <div className="bg-kino-blue min-h-screen">
-            <h1 className="text-center">Movies</h1>
+            <h1 className="text-center text-kino-white text-lg">In theaters now!</h1>
             <div>
-                <label> Filter </label>
+                <label className="pl-20 text-kino-grey"> Filter by Category </label>
                 <select name="categories" onChange={handleFilterChange}>
                     <option value="">All</option>
                     {categories?.map((category) => {
@@ -45,8 +45,9 @@ export default function MoviesPage() {
             <div className="grid grid-cols-4 gap-2 p-10 justify-items-center">
                 {movies ? (
                     movies.map((movie) => {
-                        if(movie.releaseDate)
-                        return <MoviePoster movie={movie} key={movie.id} />;
+                        if (new Date(movie.releaseDate) < new Date()) {
+                            return <MoviePoster movie={movie} key={movie.id} />;
+                        }
                     })
                 ) : (
                     <p>Loading...</p>
