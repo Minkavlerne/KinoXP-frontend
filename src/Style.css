@@ -4,4 +4,9 @@
     --kino-grey: #818790;
     --kino-white: #E6E6E6;
 }
-
+.racing-sans one-regular {
+    font-family: "Racing Sans One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
