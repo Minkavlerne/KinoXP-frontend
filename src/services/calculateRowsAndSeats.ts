@@ -6,7 +6,6 @@ export function calculateRowsAndSeats(seats: { id: number; seatRow: number; seat
         rows = Math.max(rows, seat.seatRow);
         seatsPerRow = Math.max(seatsPerRow, seat.seatNumber);
     });
-    console.log(rows, seatsPerRow);
 
     return { rows: rows + 1, seatsPerRow: seatsPerRow + 1 };
 }

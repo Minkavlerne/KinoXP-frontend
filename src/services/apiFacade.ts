@@ -38,6 +38,11 @@ async function getMovieShows() {
 async function getMovieShowById(id: number) {
     return fetch(MOVIE_SHOWS_URL + "/" + id).then(handleHttpErrors);
 }
+
+async function getMovieShowByMovieId(id: number) {
+    return fetch(MOVIE_SHOWS_URL + "/movie/" + id).then(handleHttpErrors);
+}
+
 async function postMovieShow(movieShow: MovieShow) {
     const options = makeOptions("POST", movieShow);
     return fetch(MOVIE_SHOWS_URL, options).then(handleHttpErrors);
@@ -85,6 +90,7 @@ export {
     getCategories,
     getMovieShows,
     getMovieShowById,
+    getMovieShowByMovieId,
     postMovieShow,
     updateMovieShow,
     deleteMovieShow,

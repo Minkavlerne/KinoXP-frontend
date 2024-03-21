@@ -20,8 +20,8 @@ interface MovieShow {
     id: number | null;
     startTime: Date;
     endTime: Date;
-    movieId: number;
-    theaterId: number;
+    movie: Movie;
+    theater: Theater;
 }
 
 interface Theater {
