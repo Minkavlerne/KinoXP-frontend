@@ -12,6 +12,8 @@ export default function HomePage() {
         getMovies().then((data) => setMovies(data));
     }, []);
 
+    
+
     return (
         <div className="bg-kino-blue min-h-screen">
             <div>

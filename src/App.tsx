@@ -12,6 +12,7 @@ import RequireAuth from "./security/RequireAuth";
 import Logout from "./security/Logout";
 import MoviesPage from "./pages/MoviesPage";
 import TheaterAdminView from "./components/TheaterAdminView";
+import MovieShowFormPage from "./pages/MovieShowFormPage";
 
 export default function App() {
     return (
@@ -27,6 +28,7 @@ export default function App() {
                 <Route path="/signup" element={<SignUpPage />} />
                 <Route path="/movies/:id" element={<MovieDetailView />} />
                 <Route path="/upcoming/:id" element={<MovieDetailView />} />
+                <Route path="/movieshowform" element={<MovieShowFormPage />} />
                 <Route
                     path="/theaters"
                     element={
