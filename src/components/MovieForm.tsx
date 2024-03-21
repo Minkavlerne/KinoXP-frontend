@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { postMovie, getCategories } from "../services/apiFacade";
+import { postMovie, updateMovie, getCategories } from "../services/apiFacade";
 import { Category, Movie } from "../services/entityFacade";
 import ImageConverter from "./ImageConverter";
 import Select from "react-select";
+import { useLocation, useNavigate } from "react-router";
 
 const EMPTY_MOVIE = {
   id: null,
@@ -14,11 +15,14 @@ const EMPTY_MOVIE = {
   ageLimit: 0,
   duration: "",
   releaseDate: "",
-  categories: "",
+  categories: [""],
 };
 
 function MovieForm() {
-  const movieToEdit = null;
+  const navigate = useNavigate();
+  const movieToEdit = useLocation().state || null;
+  console.log(movieToEdit);
+
   const [formData, setFormData] = useState<Movie>(movieToEdit || EMPTY_MOVIE);
   const [categoryList, setCategoryList] = useState([""]);
   const [selectedCategories, setSelectedCategories] = useState([""]);
@@ -47,16 +51,22 @@ function MovieForm() {
       posterBase64: base64,
     }));
   };
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     const movie: Movie = {
       ...formData,
       categories: selectedCategories,
     };
-    console.log(movie);
 
-    postMovie(movie);
+    if (movieToEdit) {
+      await updateMovie(movie);
+      console.log("Editing movie");
+    } else {
+      await postMovie(movie);
+      console.log("Movie added");
+    }
+    navigate("/movies");
   };
 
   return (
@@ -80,6 +90,10 @@ function MovieForm() {
         <ImageConverter onImageUpload={handleImageUpload} />
       </label>
       <label>
+        Movie Poster URL:
+        <input type="text" name="moviePoster" value={formData.posterUrl} onChange={handleChange}></input>
+      </label>
+      <label>
         Age Limit:
         <input type="number" name="ageLimit" value={formData.ageLimit} onChange={handleChange} />
       </label>
@@ -99,13 +113,14 @@ function MovieForm() {
             value: category,
             label: category,
           }))}
+          defaultValue={movieToEdit ? movieToEdit.categories.map((category: string) => ({ value: category, label: category })) : []}
           //@ts-ignore
           onChange={handleCategoryChange}
           className="mt-1 w-full"
         />
       </label>
       <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-        Submit ;
+        Submit
       </button>
     </form>
   );
