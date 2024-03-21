@@ -25,7 +25,7 @@ function MovieForm() {
 
   const [formData, setFormData] = useState<Movie>(movieToEdit || EMPTY_MOVIE);
   const [categoryList, setCategoryList] = useState([""]);
-  const [selectedCategories, setSelectedCategories] = useState([""]);
+  const [selectedCategories, setSelectedCategories] = useState(movieToEdit ? movieToEdit.categories : []);
 
   useEffect(() => {
     getCategories().then((data) => {
@@ -60,6 +60,7 @@ function MovieForm() {
     };
 
     if (movieToEdit) {
+      console.log(movie);
       await updateMovie(movie);
       console.log("Editing movie");
     } else {
