@@ -25,9 +25,9 @@ interface MovieShow {
 }
 
 interface Theater {
-    id: number;
+    id?: number | null;
     name: string;
-    seats: Array<Seat>;
+    seats?: Array<Seat>;
 }
 
 interface TheaterWithRowsAndSeats extends Theater {

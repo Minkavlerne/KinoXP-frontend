@@ -11,10 +11,11 @@ export default function TheaterAdminView() {
 
     useEffect(() => {
         getTheaterById(Number(id)).then((data) => {
+            console.log(data);
             const { rows, seatsPerRow } = calculateRowsAndSeats(data.seats);
             setTheater({ ...data, rows, seatsPerRow });
         });
-    }, [id, theater]);
+    }, [id]);
 
     return (
         <div className="bg-kino-blue min-h-screen text-kino-white flex flex-col items-center justify-center">

@@ -31,12 +31,11 @@ async function getCategories() {
     return fetch(CATEGORIES_URL).then(handleHttpErrors);
 }
 
-
 //MovieShow FETCHES
 async function getMovieShows() {
     return fetch(MOVIE_SHOWS_URL).then(handleHttpErrors);
 }
-async function getMovieShowById(id:number) {
+async function getMovieShowById(id: number) {
     return fetch(MOVIE_SHOWS_URL + "/" + id).then(handleHttpErrors);
 }
 async function postMovieShow(movieShow: MovieShow) {
@@ -77,4 +76,22 @@ async function deleteTheater(id: number) {
     return fetch(THEATERS_URL + "/" + id, options).then(handleHttpErrors);
 }
 
-export { getMovies, getMovieById, postMovie, updateMovie, deleteMovie, getCategories, getMovieShows, getMovieShowById, postMovieShow, updateMovieShow, deleteMovieShow, getUpcoming, getTheaters, getTheaterById, postTheater, updateTheater, deleteTheater };
+export {
+    getMovies,
+    getMovieById,
+    postMovie,
+    updateMovie,
+    deleteMovie,
+    getCategories,
+    getMovieShows,
+    getMovieShowById,
+    postMovieShow,
+    updateMovieShow,
+    deleteMovieShow,
+    getUpcoming,
+    getTheaters,
+    getTheaterById,
+    postTheater,
+    updateTheater,
+    deleteTheater,
+};
