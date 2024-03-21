@@ -20,6 +20,10 @@ async function updateMovie(movie: Movie) {
   const options = makeOptions("PUT", movie);
   return fetch(MOVIES_URL + "/" + movie.id, options).then(handleHttpErrors);
 }
+async function deleteMovie(id: number) {
+  const options = makeOptions("DELETE", null);
+  return fetch(MOVIES_URL + "/" + id, options).then(handleHttpErrors);
+}
 
 async function getCategories() {
   return fetch(CATEGORIES_URL).then(handleHttpErrors);
@@ -54,4 +58,4 @@ async function deleteTheater(id: number) {
   return fetch(THEATERS_URL + "/" + id, options).then(handleHttpErrors);
 }
 
-export { getMovies, getMovieById, postMovie, updateMovie, getCategories, getMovieShows, getUpcoming, getTheaters, getTheaterById, postTheater, updateTheater, deleteTheater };
+export { getMovies, getMovieById, postMovie, updateMovie, deleteMovie, getCategories, getMovieShows, getUpcoming, getTheaters, getTheaterById, postTheater, updateTheater, deleteTheater };

@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { getMovieById } from "../services/apiFacade";
+import { getMovieById, deleteMovie } from "../services/apiFacade";
 import { Movie } from "../services/entityFacade";
 import { Link, useParams } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 
 export default function MovieDetailView() {
   const [movie, setMovie] = useState<Movie | null>(null);
   const { id } = useParams();
+  //const navigate = useNavigate();
 
   useEffect(() => {
     getMovieById(Number(id)).then((data) => setMovie(data));

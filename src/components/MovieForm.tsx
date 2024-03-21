@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { postMovie, updateMovie, getCategories } from "../services/apiFacade";
+import { postMovie, updateMovie, deleteMovie, getCategories } from "../services/apiFacade";
 import { Category, Movie } from "../services/entityFacade";
 import ImageConverter from "./ImageConverter";
 import Select from "react-select";
@@ -70,6 +70,16 @@ function MovieForm() {
     navigate("/movies");
   };
 
+  const handleDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    if (movieToEdit) {
+      deleteMovie(Number(formData.id));
+    } else {
+      alert("Cannot delete movie, tickets are booked");
+    }
+    setFormData(EMPTY_MOVIE);
+  };
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col items-start space-y-4 max-w-md mx-auto p-4 bg-gray-100 rounded-md">
       <label>
@@ -122,6 +132,9 @@ function MovieForm() {
       </label>
       <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
         Submit
+      </button>
+      <button onClick={handleDelete} className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+        Delete Movie
       </button>
     </form>
   );
