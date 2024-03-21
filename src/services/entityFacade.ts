@@ -17,7 +17,7 @@ interface Category {
 }
 
 interface MovieShow {
-    id: number;
+    id: number | null;
     startTime: Date;
     endTime: Date;
     movieId: number;

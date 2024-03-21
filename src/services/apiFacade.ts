@@ -3,7 +3,7 @@ import { handleHttpErrors, makeOptions } from "./fetchUtils";
 import { API_URL } from "../settings";
 const MOVIES_URL = API_URL + "/movies";
 const CATEGORIES_URL = API_URL + "/categories";
-const MOVIE_SHOWS_URL = API_URL + "/movieShows";
+const MOVIE_SHOWS_URL = API_URL + "/movieshows";
 const THEATERS_URL = API_URL + "/theaters";
 
 //Movie FETCHES

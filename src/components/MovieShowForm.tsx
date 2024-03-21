@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { MovieShow, Movie, Theater } from "../services/entityFacade";
+import { useEffect, useState } from "react";
 import { getMovies, getTheaters, postMovieShow } from "../services/apiFacade";
-import { useLocation } from "react-router-dom";
+import { Movie, Theater } from "../services/entityFacade";
 
 const EMPTY_MOVIE_SHOW = {
     id: null,
@@ -12,78 +11,88 @@ const EMPTY_MOVIE_SHOW = {
 };
 
 function MovieShowForm() {
-    const movieShowToEdit = useLocation().state || null;
-    const [formData, setFormData] = useState<MovieShow>(movieShowToEdit || EMPTY_MOVIE_SHOW);
-    const [movie, setMovie] = useState<Movie[]>([]);
-    const [theater, setTheater] = useState<Theater[]>([]);
-
-    const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
-    const [selectedTheater, setSelectedTheater] = useState<Theater | null>(null);
+    const [movies, setMovies] = useState<Movie[]>([]);
+    const [theaters, setTheaters] = useState<Theater[]>([]);
+    const [formData, setFormData] = useState(EMPTY_MOVIE_SHOW);
 
     useEffect(() => {
-        getMovies().then((data) => {
-            setMovie(data);
-        });
-        getTheaters().then((data) => {
-            setTheater(data);
-        });
+        getMovies().then((data) => setMovies(data));
+        getTheaters().then((data) => setTheaters(data));
     }, []);
 
-    function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-        const { name, value } = event.target;
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            [name]: value,
-        }));
+    function handleMovieSelectChange(e: React.ChangeEvent<HTMLSelectElement>) {
+        console.log(e.target.value);
+        const currentMovie = movies.find((movie) => movie.title === e.target.value);
+        setFormData((prev) => ({ ...prev, movieId: currentMovie ? Number(currentMovie.id) : 0 }));
     }
 
+    function handleTheaterSelectChange(e: React.ChangeEvent<HTMLSelectElement>) {
+        console.log(e.target.value);
+        const currentTheater = theaters.find((theater) => theater.name === e.target.value);
+        setFormData((prev) => ({ ...prev, theaterId: currentTheater ? Number(currentTheater.id) : 0 }));
+    }
 
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    }
 
-    const handleSubmit = (event: React.FormEvent) => {
-        event.preventDefault();
+    async function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
+        e.preventDefault();
+        console.log(formData);
+        const startTime = new Date(formData.startTime);
+        const endTime = new Date(formData.endTime);
 
-        const movieShow: MovieShow = {
+        const updatedFormData = {
             ...formData,
+            startTime: startTime,
+            endTime: endTime,
         };
-        console.log(movieShow);
-
-        postMovieShow(movieShow);
-    };
+        postMovieShow(updatedFormData);
+    }
 
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col items-start space-y-4 max-w-md mx-auto p-4 bg-gray-100 rounded-md">
-            <label>
-                Start Time:
-                <input type="datetime-local" name="startTime" value={formData.startTime.toISOString().slice(0, -1)} onChange={handleChange} />
-            </label>
-            <label>
-                End Time:
-                <input type="datetime-local" name="endTime" value={formData.endTime.toISOString().slice(0, -1)} onChange={handleChange} />
-            </label>
-            <label>
-                Movie ID:
-                <select name="movieId" value={formData.movieId} onChange={handleChange}>
-                    {movieId.map((movieId) => (
-                        <option key={movieId} value={movieId}>
-                            {movieId}
+        <div>
+            <form className="flex flex-col">
+                <label>
+                    Start Time:
+                    <input type="datetime-local" name="startTime" onChange={handleChange} />
+                </label>
+                <label>
+                    End Time:
+                    <input type="datetime-local" name="endTime" onChange={handleChange} />
+                </label>
+                <label>
+                    Movie
+                    <select name="movie" onChange={handleMovieSelectChange}>
+                        <option value="" disabled>
+                            Select a movie
                         </option>
-                    ))}
-                </select>
-            </label>
-            <label>
-                Theater ID:
-                <select name="theaterId" value={formData.theaterId} onChange={handleChange}>
-                    {theaterId.map((theaterId) => (
-                        <option key={theaterId} value={theaterId}>
-                            {theaterId}
+                        {movies.map((movie) => (
+                            <option key={movie.id} value={movie.title}>
+                                {movie.title}
+                            </option>
+                        ))}
+                    </select>
+                </label>
+                <label>
+                    Theater
+                    <select name="theater" onChange={handleTheaterSelectChange}>
+                        <option value="" disabled>
+                            Select a theater
                         </option>
-                    ))}
-                </select>
-            </label>
-            <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        {theaters.map((theater) => (
+                            <option key={theater.id} value={theater.name}>
+                                {theater.name}
+                            </option>
+                        ))}
+                    </select>
+                </label>
+            </form>
+            <button type="submit" onClick={handleSubmit}>
                 Submit
             </button>
-        </form>
+        </div>
     );
 }
 
