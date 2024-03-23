@@ -17,11 +17,11 @@ interface Category {
 }
 
 interface MovieShow {
-    id: number;
+    id: number | null;
     startTime: Date;
     endTime: Date;
-    movieId: number;
-    theaterId: number;
+    movie: Movie;
+    theater: Theater;
 }
 
 interface Theater {
@@ -36,10 +36,10 @@ interface TheaterWithRowsAndSeats extends Theater {
 }
 
 interface Booking {
-    id: number;
-    bookingNumber: string;
-    username: string;
+    id: number | null;
+    userName: string;
     movieShowId: number;
+    seatIds: number[];
 }
 
 interface Seat {

@@ -18,7 +18,7 @@ export default function MoviePoster({ movie }: { movie: Movie }) {
                         <Link to={`/movies/${movie.id}`} className="w-1/2 px-2 py-1 border-solid rounded bg-kino-grey mx-2">
                             Details
                         </Link>
-                        <Link to={`/tickets/${movie.id}`} className="w-1/2 px-2 py-1 border-solid rounded bg-kino-red mx-2">
+                        <Link to={`/movies/${movie.id}/movieshows`} className="w-1/2 px-2 py-1 border-solid rounded bg-kino-red mx-2">
                             Buy Tickets
                         </Link>
                     </div>
