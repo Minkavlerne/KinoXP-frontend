@@ -50,8 +50,8 @@ export default function MovieShowTicketsPage() {
     }
 
     return (
-        <div className="bg-kino-blue min-h-screen text-kino-grey pb-10 px-10">
-            <h1 className="pb-10">MovieShowTicketsPage</h1>
+        <div className="bg-kino-blue min-h-screen text-kino-grey pb-10 px-10 text-white">
+            <h1 className="pb-10 text-center">Seat selection for {movieShow?.movie.title}</h1>
             <div className="grid grid-cols-[350px_auto]">
                 <div>
                     <h2>Selected Seats</h2>
@@ -61,7 +61,7 @@ export default function MovieShowTicketsPage() {
                         </p>
                     ))}
                     <div className="pt-5">
-                        <button className="p-2 border-solid rounded bg-blue-500 text-white" onClick={handleClick}>
+                        <button className="p-2 border-solid rounded bg-blue-500" onClick={handleClick}>
                             Book seats
                         </button>
                     </div>
