@@ -54,13 +54,13 @@ function MovieShowForm() {
     }
 
     return (
-        <div>
+        <div className="text-kino-grey">
             <form className="flex flex-col">
-                <label>
+                <label className="flex flex-col">
                     Start Time:
                     <input type="datetime-local" name="startTime" onChange={handleChange} />
                 </label>
-                <label>
+                <label className="flex flex-col">
                     End Time:
                     <input type="datetime-local" name="endTime" onChange={handleChange} />
                 </label>

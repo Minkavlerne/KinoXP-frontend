@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { MovieShow, TheaterWithRowsAndSeats } from "../services/entityFacade";
+import { MovieShow, TheaterWithRowsAndSeats, Booking } from "../services/entityFacade";
 import { calculateRowsAndSeats } from "../services/calculateRowsAndSeats";
 import { TheaterSeats } from "../components/TheaterSeats";
+import { postBooking } from "../services/apiFacade";
 
 export default function MovieShowTicketsPage() {
-    const [movieShow, setMovieShow] = useState<MovieShow | null>(useLocation().state || null);
+    const [movieShow] = useState<MovieShow | null>(useLocation().state || null);
     const [theater, setTheater] = useState<TheaterWithRowsAndSeats | null>(null);
     const [selectedSeats, setSelectedSeats] = useState<{ row: number; seat: number }[]>([]);
     const [selectedSeatIds, setSelectedSeatIds] = useState<number[]>([]);
@@ -34,6 +35,20 @@ export default function MovieShowTicketsPage() {
         }
     }
 
+    async function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
+        e.preventDefault();
+        const userName = localStorage.getItem("username");
+        if (userName) {
+            const newBooking: Booking = {
+                id: null,
+                userName: userName,
+                movieShowId: movieShow!.id!,
+                seatIds: selectedSeatIds,
+            };
+            postBooking(newBooking);
+        }
+    }
+
     return (
         <div className="bg-kino-blue min-h-screen text-kino-grey pb-10 px-10">
             <h1 className="pb-10">MovieShowTicketsPage</h1>
@@ -45,6 +60,11 @@ export default function MovieShowTicketsPage() {
                             Row: {seat.row + 1}, Seat: {seat.seat + 1}
                         </p>
                     ))}
+                    <div className="pt-5">
+                        <button className="p-2 border-solid rounded bg-blue-500 text-white" onClick={handleClick}>
+                            Book seats
+                        </button>
+                    </div>
                 </div>
                 {movieShow && (
                     <div className="text-white">
