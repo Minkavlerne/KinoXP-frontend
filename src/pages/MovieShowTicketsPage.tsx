@@ -3,18 +3,25 @@ import { useLocation } from "react-router-dom";
 import { MovieShow, TheaterWithRowsAndSeats, Booking } from "../services/entityFacade";
 import { calculateRowsAndSeats } from "../services/calculateRowsAndSeats";
 import { TheaterSeats } from "../components/TheaterSeats";
-import { postBooking } from "../services/apiFacade";
+import { postBooking, getBookingsByMovieShowId } from "../services/apiFacade";
 
 export default function MovieShowTicketsPage() {
-    const [movieShow] = useState<MovieShow | null>(useLocation().state || null);
+    const movieShow: MovieShow | null = useLocation().state || null;
     const [theater, setTheater] = useState<TheaterWithRowsAndSeats | null>(null);
     const [selectedSeats, setSelectedSeats] = useState<{ row: number; seat: number }[]>([]);
     const [selectedSeatIds, setSelectedSeatIds] = useState<number[]>([]);
+    const [bookedSeatIds, setBookedSeatIds] = useState<number[]>([]);
 
     useEffect(() => {
         if (movieShow?.theater.seats) {
             const { rows, seatsPerRow } = calculateRowsAndSeats(movieShow.theater.seats);
             setTheater({ ...movieShow.theater, rows, seatsPerRow });
+        }
+        if (movieShow?.id) {
+            getBookingsByMovieShowId(movieShow.id).then((bookings) => {
+                const allBookedSeatIds = bookings.flatMap((booking: Booking) => booking.seatIds);
+                setBookedSeatIds(allBookedSeatIds);
+            });
         }
     }, [movieShow]);
 
