@@ -87,6 +87,10 @@ async function getBookings() {
     return fetch(BOOKING_URL).then(handleHttpErrors);
 }
 
+async function getBookingsByMovieShowId(id: number) {
+    return fetch(BOOKING_URL + "/movieshow/" + id).then(handleHttpErrors);
+}
+
 async function postBooking(booking: Booking) {
     const options = makeOptions("POST", booking);
     return fetch(BOOKING_URL, options).then(handleHttpErrors);
@@ -112,5 +116,6 @@ export {
     updateTheater,
     deleteTheater,
     getBookings,
+    getBookingsByMovieShowId,
     postBooking,
 };

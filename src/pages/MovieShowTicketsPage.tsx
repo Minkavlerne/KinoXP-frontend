@@ -3,18 +3,26 @@ import { useLocation } from "react-router-dom";
 import { MovieShow, TheaterWithRowsAndSeats, Booking } from "../services/entityFacade";
 import { calculateRowsAndSeats } from "../services/calculateRowsAndSeats";
 import { TheaterSeats } from "../components/TheaterSeats";
-import { postBooking } from "../services/apiFacade";
+import { postBooking, getBookingsByMovieShowId } from "../services/apiFacade";
 
 export default function MovieShowTicketsPage() {
-    const [movieShow] = useState<MovieShow | null>(useLocation().state || null);
+    const movieShow: MovieShow | null = useLocation().state || null;
     const [theater, setTheater] = useState<TheaterWithRowsAndSeats | null>(null);
     const [selectedSeats, setSelectedSeats] = useState<{ row: number; seat: number }[]>([]);
     const [selectedSeatIds, setSelectedSeatIds] = useState<number[]>([]);
+    const [bookedSeatIds, setBookedSeatIds] = useState<number[]>([]);
+    const [isBooking, setIsBooking] = useState(false);
 
     useEffect(() => {
         if (movieShow?.theater.seats) {
             const { rows, seatsPerRow } = calculateRowsAndSeats(movieShow.theater.seats);
             setTheater({ ...movieShow.theater, rows, seatsPerRow });
+        }
+        if (movieShow?.id) {
+            getBookingsByMovieShowId(movieShow.id).then((bookings) => {
+                const allBookedSeatIds = bookings.flatMap((booking: Booking) => booking.seatIds);
+                setBookedSeatIds(allBookedSeatIds);
+            });
         }
     }, [movieShow]);
 
@@ -33,25 +41,32 @@ export default function MovieShowTicketsPage() {
         } else {
             setSelectedSeats(selectedSeats.filter((s) => s.row !== row || s.seat !== seat));
         }
+        console.log(seatId);
     }
 
     async function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
         const userName = localStorage.getItem("username");
-        if (userName) {
+        if (userName && selectedSeats.length > 0) {
+            setIsBooking(true);
             const newBooking: Booking = {
                 id: null,
                 userName: userName,
                 movieShowId: movieShow!.id!,
                 seatIds: selectedSeatIds,
             };
-            postBooking(newBooking);
+            postBooking(newBooking).then(() => {
+                setSelectedSeats([]);
+                setSelectedSeatIds([]);
+                setIsBooking(false);
+                console.log("Hej");
+            });
         }
     }
 
     return (
-        <div className="bg-kino-blue min-h-screen text-kino-grey pb-10 px-10">
-            <h1 className="pb-10">MovieShowTicketsPage</h1>
+        <div className="bg-kino-blue min-h-screen text-kino-grey pb-10 px-10 text-white">
+            <h1 className="pb-10 text-center">Seat selection for {movieShow?.movie.title}</h1>
             <div className="grid grid-cols-[350px_auto]">
                 <div>
                     <h2>Selected Seats</h2>
@@ -61,7 +76,7 @@ export default function MovieShowTicketsPage() {
                         </p>
                     ))}
                     <div className="pt-5">
-                        <button className="p-2 border-solid rounded bg-blue-500 text-white" onClick={handleClick}>
+                        <button disabled={isBooking} className="p-2 border-solid rounded bg-blue-500" onClick={handleClick}>
                             Book seats
                         </button>
                     </div>
@@ -69,7 +84,7 @@ export default function MovieShowTicketsPage() {
                 {movieShow && (
                     <div className="text-white">
                         <h1>{movieShow.theater.name}</h1>
-                        <TheaterSeats rows={theater?.rows || 0} seatsPerRow={theater?.seatsPerRow || 0} onSeatClick={(row, seat) => handleSeatClick(row, seat)} />
+                        <TheaterSeats rows={theater?.rows || 0} seatsPerRow={theater?.seatsPerRow || 0} onSeatClick={(row, seat) => handleSeatClick(row, seat)} bookedSeatIds={bookedSeatIds} theaterSeats={movieShow.theater.seats} />
                     </div>
                 )}
             </div>
