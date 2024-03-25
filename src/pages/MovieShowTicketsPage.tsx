@@ -11,6 +11,7 @@ export default function MovieShowTicketsPage() {
     const [selectedSeats, setSelectedSeats] = useState<{ row: number; seat: number }[]>([]);
     const [selectedSeatIds, setSelectedSeatIds] = useState<number[]>([]);
     const [bookedSeatIds, setBookedSeatIds] = useState<number[]>([]);
+    const [isBooking, setIsBooking] = useState(false);
 
     useEffect(() => {
         if (movieShow?.theater.seats) {
@@ -40,19 +41,26 @@ export default function MovieShowTicketsPage() {
         } else {
             setSelectedSeats(selectedSeats.filter((s) => s.row !== row || s.seat !== seat));
         }
+        console.log(seatId);
     }
 
     async function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
         const userName = localStorage.getItem("username");
-        if (userName) {
+        if (userName && selectedSeats.length > 0) {
+            setIsBooking(true);
             const newBooking: Booking = {
                 id: null,
                 userName: userName,
                 movieShowId: movieShow!.id!,
                 seatIds: selectedSeatIds,
             };
-            postBooking(newBooking);
+            postBooking(newBooking).then(() => {
+                setSelectedSeats([]);
+                setSelectedSeatIds([]);
+                setIsBooking(false);
+                console.log("Hej");
+            });
         }
     }
 
@@ -68,7 +76,7 @@ export default function MovieShowTicketsPage() {
                         </p>
                     ))}
                     <div className="pt-5">
-                        <button className="p-2 border-solid rounded bg-blue-500" onClick={handleClick}>
+                        <button disabled={isBooking} className="p-2 border-solid rounded bg-blue-500" onClick={handleClick}>
                             Book seats
                         </button>
                     </div>
@@ -76,7 +84,7 @@ export default function MovieShowTicketsPage() {
                 {movieShow && (
                     <div className="text-white">
                         <h1>{movieShow.theater.name}</h1>
-                        <TheaterSeats rows={theater?.rows || 0} seatsPerRow={theater?.seatsPerRow || 0} onSeatClick={(row, seat) => handleSeatClick(row, seat)} />
+                        <TheaterSeats rows={theater?.rows || 0} seatsPerRow={theater?.seatsPerRow || 0} onSeatClick={(row, seat) => handleSeatClick(row, seat)} bookedSeatIds={bookedSeatIds} theaterSeats={movieShow.theater.seats} />
                     </div>
                 )}
             </div>
